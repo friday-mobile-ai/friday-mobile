@@ -1,12 +1,251 @@
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FRIDAY Mobile</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#243b53">
+<title>FRIDAY Mobile</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #172536;
+  color: #f5f9ff;
+}
+
+.app {
+  max-width: 480px;
+  margin: auto;
+  min-height: 100vh;
+  padding: 22px 18px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.logo {
+  font-size: 29px;
+  font-weight: bold;
+  letter-spacing: 4px;
+  color: #80e1ef;
+}
+
+.subtitle {
+  color: #b5c6d8;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.status {
+  color: #8de0c0;
+  font-size: 12px;
+}
+
+.welcome {
+  background: #2b4057;
+  padding: 23px;
+  border-radius: 17px;
+  margin-bottom: 24px;
+}
+
+.welcome h2 {
+  margin: 0 0 10px;
+}
+
+.welcome p {
+  color: #cad9e8;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 13px;
+}
+
+.module {
+  border: 1px solid #49637c;
+  background: #26394e;
+  border-radius: 17px;
+  padding: 20px 12px;
+  color: white;
+  text-align: left;
+  min-height: 140px;
+  cursor: pointer;
+}
+
+.module:active {
+  background: #395773;
+}
+
+.module .symbol {
+  font-size: 29px;
+  margin-bottom: 15px;
+}
+
+.module strong {
+  display: block;
+  font-size: 15px;
+}
+
+.module small {
+  display: block;
+  margin-top: 8px;
+  color: #bbccdc;
+  line-height: 1.4;
+}
+
+.panel {
+  margin-top: 22px;
+  padding: 19px;
+  border-radius: 15px;
+  background: #30465e;
+}
+
+.panel p {
+  color: #d1dfec;
+  line-height: 1.5;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  gap: 5px;
+  margin-top: 25px;
+  background: #293e54;
+  border-radius: 16px;
+  padding: 15px 5px;
+}
+
+nav button {
+  background: transparent;
+  color: #d7e6f3;
+  border: none;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 6px;
+}
+
+.action {
+  background: #90e1ee;
+  color: #142333;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+footer {
+  margin-top: 25px;
+  text-align: center;
+  font-size: 11px;
+  color: #a4b7ca;
+}
+</style>
 </head>
+
 <body>
-  <h1>FRIDAY</h1>
-  <p>Assistente personale - Sistema avviato</p>
+<div class="app">
+
+<header>
+  <div>
+    <div class="logo">FRIDAY</div>
+    <div class="subtitle">PERSONAL ASSISTANT</div>
+  </div>
+  <div class="status">● ONLINE</div>
+</header>
+
+<section class="welcome">
+  <h2>Centro di controllo</h2>
+  <p>
+    La tua assistente personale.
+    Seleziona un modulo per iniziare.
+  </p>
+</section>
+
+<div class="grid">
+
+<button class="module" onclick="show('Giornata')">
+  <div class="symbol">◷</div>
+  <strong>Giornata</strong>
+  <small>Impegni e priorità</small>
+</button>
+
+<button class="module" onclick="show('Consulente')">
+  <div class="symbol">✧</div>
+  <strong>Consulente</strong>
+  <small>Analisi e decisioni</small>
+</button>
+
+<button class="module" onclick="show('Accademia')">
+  <div class="symbol">▤</div>
+  <strong>Accademia</strong>
+  <small>Formazione e test</small>
+</button>
+
+<button class="module" onclick="show('Operatività')">
+  <div class="symbol">⚙</div>
+  <strong>Operatività</strong>
+  <small>Attività e progetti</small>
+</button>
+
+</div>
+
+<section class="panel" id="panel">
+  <h3>FRIDAY pronta</h3>
+  <p>Scegli un modulo della dashboard.</p>
+</section>
+
+<nav>
+  <button onclick="show('Missioni')">◎ Missioni</button>
+  <button onclick="show('Archivio')">▣ Archivio</button>
+  <button onclick="show('Chat')">◉ Chat</button>
+  <button onclick="show('Impostazioni')">⚙ Opzioni</button>
+</nav>
+
+<footer>FRIDAY MOBILE — VERSIONE 0.1</footer>
+
+</div>
+
+<script>
+function show(name) {
+  const panel = document.getElementById("panel");
+
+  if (name === "Chat") {
+    panel.innerHTML = `
+      <h3>Chat AI locale</h3>
+      <p>Apri il laboratorio WebLLM.
+      L'integrazione diretta arriverà
+      in una versione successiva.</p>
+      <button class="action"
+        onclick="window.open('https://webllm.io/playground','_blank')">
+        Apri WebLLM
+      </button>`;
+    return;
+  }
+
+  panel.replaceChildren();
+
+  const title = document.createElement("h3");
+  title.textContent = name;
+
+  const description = document.createElement("p");
+  description.textContent =
+    "Modulo selezionato. Le funzioni saranno aggiunte progressivamente.";
+
+  panel.append(title, description);
+}
+</script>
+
 </body>
 </html>
